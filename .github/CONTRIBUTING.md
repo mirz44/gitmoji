@@ -11,32 +11,35 @@ If you would like to add a new emoji to gitmoji, fill the provided `ISSUE_TEMPLA
 1. Fork [this repository](https://github.com/carloscuesta/gitmoji/fork).
 2. Create a new branch with the feature name. (Eg: add-emoji-deploy, fix-website-header)
 3. Make your changes.
-4. Commit your changes. Don't forget to add a commit title with an emoji and a description.
-5. Push your changes.
-6. Submit your pull request.
+4. Test you changes by running `yarn test`
+   - 4.1. If the snapshots are failing run `yarn test -u` and be sure that the new snapshots match your changes
+5. Commit your changes. Don't forget to add a commit title with an emoji and a description.
+6. Push your changes.
+7. Submit your pull request.
 
 ## How to add a gitmoji
 
+A **gitmoji** should define an action not a scope and it should answer the following question: _"What has been done in the commit?"_ instead of _how_, take that into consideration when trying to suggest a new addition!
+
 1. Open the **gitmojis.json** file located at `src/data/gitmojis.json`.
 2. Add your emoji using the following code inside of the `gitmojis array []`:
-3. Save the file and create a pull request.
+3. Add a new color to [the emojiColorsMap.js](https://github.com/carloscuesta/gitmoji/blob/master/src/components/GitmojiList/emojiColorsMap.js) file. Matching the name you added at the JSON file.
+4. Save the file and create a pull request.
 
 ```json
 {
   "emoji": "",
   "entity": "entity (Ex: &#x1F440)",
   "code": ":code:",
-  "description": "Enter the description for the gitmoji.",
-  "name": "code (same as code but without ':' replace underscores for dashes _ => - )"
+  "description": "Enter the description for the gitmoji. Use present form for verbs.",
+  "name": "code (same as code but without ':' replace underscores for dashes _ => - )",
+  "semver": "The semantic versioning effect (can be `'major'`, `'minor'`, `'patch'` or `null` if the commit has no effect on the version)"
 }
 ```
+
 If you want to find the hexadecimal entity of icon, search for it in this site: <a>http://graphemica.com/</a>
 
-Then, after that you'll need to add a new color to [the vars.scss](https://github.com/carloscuesta/gitmoji/blob/master/src/styles/_includes/_vars.scss) file.
-
-You must follow the convention of adding a new item to the `$gitmojis array`. That matches the name that you added at the json file.
-
-## How to start gitmoji and update
+## How to start gitmoji
 
 If you want to make changes to the site, follow the next steps:
 
@@ -50,24 +53,7 @@ $ cd gitmoji
 2. Install the dependencies and start the development task.
 
 ```bash
-$ npm i && gulp
+$ yarn install && yarn run dev
 ```
 
-3. Make sure the styles are using a link instead of being inlined.
-
-_If you are updating the SCSS files and the styles doesn't get updated, go to the `index.pug` and `about.pug` paste the following code_
-
-```jade
-link(href="css/style.css", type="text/css", rel="stylesheet")
-```
-
-_Remove this one_
-
-```jade
-style
-  include ../../dist/css/style.css
-```
-
-**After making your changes, inline the styles as before.**
-
-The project is built with [Pug](http://pugjs.org) and [SCSS](http://sass-lang.com)
+The project is built with [Next.js](http://nextjs.org)
